@@ -14,3 +14,72 @@ pipeline {
         }
     }
 }
+
+pipeline {
+    agent any
+    environment {
+        // Define path for Cypress and reports
+        CYPRESS_BIN = 'node_modules/.bin/cypress'
+        REPORT_DIR = 'cypress/results'
+    }
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install dependencies (including Cypress and mochawesome)
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Run Cypress Tests') {
+            steps {
+                script {
+                    // Run Cypress tests with the mochawesome reporter
+                    sh "$CYPRESS_BIN run"
+                }
+            }
+        }
+
+        stage('Merge Reports') {
+            steps {
+                script {
+                    // Merge mochawesome JSON reports into one
+                    sh "npx mochawesome-merge $REPORT_DIR/*.json > $REPORT_DIR/report.json"
+                }
+            }
+        }
+
+        stage('Generate HTML Report') {
+            steps {
+                script {
+                    // Generate the final HTML report using mochawesome-report-generator
+                    sh "npx mochawesome-report-generator $REPORT_DIR/report.json -o $REPORT_DIR"
+                }
+            }
+        }
+
+        stage('Publish HTML Report') {
+            steps {
+                // Archive the generated report as an artifact
+                archiveArtifacts artifacts: 'cypress/results/*.html', allowEmptyArchive: true
+            }
+        }
+
+        stage('Clean up') {
+            steps {
+                script {
+                    // Clean up the generated reports
+                    sh "rm -rf cypress/results"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Always clean up or perform actions after tests, like sending notifications
+            cleanWs()
+        }
+    }
+}
