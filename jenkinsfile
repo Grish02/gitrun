@@ -83,3 +83,13 @@ pipeline {
         }
     }
 }
+post {
+    always {
+        publishHTML(target: [
+            reportName: 'Cypress Test Report',
+            reportDir: 'cypress/results',
+            reportFiles: 'index.html',
+            keepAll: true
+        ])
+    }
+}
