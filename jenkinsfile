@@ -1,45 +1,32 @@
 pipeline {
     agent any
-    environment {
-        CYPRESS_CACHE_FOLDER = '/tmp/.cache/Cypress'
-    }
     stages {
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Install node dependencies
-                    sh 'npm install'
-                }
+                bat 'npm install'
+                bat 'npx cypress install'
             }
         }
         stage('Run Cypress Tests') {
             steps {
-                script {
-                    // Run Cypress tests in headless mode
-                    sh 'npx cypress run --headless'
-                }
+                bat 'npx cypress run'
             }
         }
-        stage('Publish Test Results') {
+         stage('Merge Reports') {
             steps {
-                script {
-                    // Publish the test results (Junit format)
-                    junit '**/cypress/results/*.xml'
-                }
+                bat 'npx mochawesome-merge cypress/reports/*.json -o cypress/reports/merged-report.json'
+                bat 'npx marge cypress/reports/merged-report.json -o cypress/reports'
             }
         }
+
+        stage('Publish HTML Report') {
+            steps {
+                publishHTML([
+                    reportDir: 'cypress/reports',
+                    reportFiles: 'merged-report.html',
+                    reportName: 'Cypress Test Report',
+                    keepAll: true
+                ])
+            }
     }
-    post {
-        always {
-            // Clean up or post-test tasks
-        }
-    }
-    stage('Merge Results') {
-    steps {
-        script {
-            sh 'npx mochawesome-merge cypress/results/*.json > cypress/results/report.json'
-            junit 'cypress/results/report.json'
-        }
-    }
-}
 }

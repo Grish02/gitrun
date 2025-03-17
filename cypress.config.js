@@ -20,12 +20,16 @@ module.exports = defineConfig({
     specPattern: "cypress/e2e/**/*.cy.js", // Set the test file pattern
 
     // Add Mochawesome reporter settings
-    reporter: "mochawesome",
-    reporterOptions: {
-      reportDir: "cypress/reports",
-      overwrite: false,
-      html: false,
-      json: true
-    }
+   
   }
+  
 });
+{
+  reporter: "mochawesome";
+  reporterOptions: {
+    reportDir: "cypress/results";
+    overwrite: false;
+    html: false;
+    json: true
+  }
+}
