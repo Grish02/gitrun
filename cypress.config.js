@@ -18,15 +18,14 @@ module.exports = defineConfig({
     viewportWidth: 1280,
     viewportHeight: 720,
     specPattern: "cypress/e2e/**/*.cy.js", // Set the test file pattern
-  },
-});
 
-{
-  reporter: "mochawesome";
-  reporterOptions: {
-    reportDir: "cypress/results";
-    overwrite: false;
-    html: false;
-    json: true
-  };
-}
+    // Add Mochawesome reporter settings
+    reporter: "mochawesome",
+    reporterOptions: {
+      reportDir: "cypress/reports",
+      overwrite: false,
+      html: false,
+      json: true
+    }
+  }
+});
