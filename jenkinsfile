@@ -1,38 +1,45 @@
 pipeline {
     agent any
+    environment {
+        CYPRESS_CACHE_FOLDER = '/tmp/.cache/Cypress'
+    }
     stages {
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
-                bat 'npx cypress install'
+                script {
+                    // Install node dependencies
+                    sh 'npm install'
+                }
             }
         }
         stage('Run Cypress Tests') {
             steps {
-                bat 'npx cypress run'
+                script {
+                    // Run Cypress tests in headless mode
+                    sh 'npx cypress run --headless'
+                }
             }
         }
-         stage('Merge Reports') {
+        stage('Publish Test Results') {
             steps {
-                bat 'npx mochawesome-merge cypress/reports/*.json -o cypress/reports/merged-report.json'
-                bat 'npx marge cypress/reports/merged-report.json -o cypress/reports'
+                script {
+                    // Publish the test results (Junit format)
+                    junit '**/cypress/results/*.xml'
+                }
             }
         }
-
-        stage('Publish HTML Report') {
-            steps {
-                publishHTML([
-                    reportDir: 'cypress/reports',
-                    reportFiles: 'merged-report.html',
-                    reportName: 'Cypress Test Report',
-                    keepAll: true
-                ])
-            }
     }
-}
-post{
-    success{
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'cypress/reports', reportFiles: 'merged-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+    post {
+        always {
+            // Clean up or post-test tasks
+        }
+    }
+    stage('Merge Results') {
+    steps {
+        script {
+            sh 'npx mochawesome-merge cypress/results/*.json > cypress/results/report.json'
+            junit 'cypress/results/report.json'
+        }
     }
 }
 }
