@@ -31,7 +31,7 @@ pipeline {
     }
 }
 post{
-    sucess{
+    success{
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'cypress/reports', reportFiles: 'merged-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
     }
 }
