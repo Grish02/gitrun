@@ -5,9 +5,9 @@
     "passes": 4,
     "pending": 0,
     "failures": 0,
-    "start": "2025-03-17T11:19:34.499Z",
-    "end": "2025-03-17T11:19:47.458Z",
-    "duration": 12959,
+    "start": "2025-03-18T02:43:21.456Z",
+    "end": "2025-03-18T02:43:34.261Z",
+    "duration": 12805,
     "testsRegistered": 4,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "d1a75698-d715-424d-b457-7b32516ff334",
+      "uuid": "86a87d6d-838f-47ea-9a7d-f395a1c05934",
       "title": "",
       "fullFile": "cypress\\e2e\\spec.cy.js",
       "file": "cypress\\e2e\\spec.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "2e7961ae-b0fc-4825-abd2-3dd6b0b47870",
+          "uuid": "f413c741-5432-40aa-b70d-faa58b570356",
           "title": "xyz bank customer page",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "validate customer existence",
               "fullTitle": "xyz bank customer page validate customer existence",
               "timedOut": null,
-              "duration": 3873,
+              "duration": 4657,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": null,
               "code": "cy.get('table>tbody>tr').should('have.length.gt', 0);",
               "err": {},
-              "uuid": "df5fd1f9-1199-480b-bea5-5c6759c725f5",
-              "parentUUID": "2e7961ae-b0fc-4825-abd2-3dd6b0b47870",
+              "uuid": "105db3d3-bc78-4c5a-bf58-3fc0eedeeb35",
+              "parentUUID": "f413c741-5432-40aa-b70d-faa58b570356",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "should fetch searched customer",
               "fullTitle": "xyz bank customer page should fetch searched customer",
               "timedOut": null,
-              "duration": 1815,
+              "duration": 2202,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "cy.get('input[ng-model=\"searchCustomer\"]').type(\"harry\");\ncy.get('table>tbody>tr>td').should('contain', 'Harry');",
               "err": {},
-              "uuid": "cfb64929-8125-4737-998b-de2067180e35",
-              "parentUUID": "2e7961ae-b0fc-4825-abd2-3dd6b0b47870",
+              "uuid": "2aab8fce-d317-4daf-9318-f49c3e63345c",
+              "parentUUID": "f413c741-5432-40aa-b70d-faa58b570356",
               "isHook": false,
               "skipped": false
             },
@@ -74,7 +74,7 @@
               "title": "should delete customer",
               "fullTitle": "xyz bank customer page should delete customer",
               "timedOut": null,
-              "duration": 1681,
+              "duration": 1538,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -83,8 +83,8 @@
               "context": null,
               "code": "cy.get('table>tbody>tr>td').contains('Harry').parent().find('button').click();\ncy.get('table>tbody>tr>td').should('not.contain', 'Harry');",
               "err": {},
-              "uuid": "959d9e25-7309-4a79-a6b2-045b55811873",
-              "parentUUID": "2e7961ae-b0fc-4825-abd2-3dd6b0b47870",
+              "uuid": "f0658086-a9b0-4076-a4f1-c017515ab557",
+              "parentUUID": "f413c741-5432-40aa-b70d-faa58b570356",
               "isHook": false,
               "skipped": false
             },
@@ -92,7 +92,7 @@
               "title": "should delete customer fetched by search",
               "fullTitle": "xyz bank customer page should delete customer fetched by search",
               "timedOut": null,
-              "duration": 2558,
+              "duration": 1879,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -101,23 +101,23 @@
               "context": null,
               "code": "cy.get('input[ng-model=\"searchCustomer\"]').type(\"harry\");\ncy.get('table>tbody>tr>td').contains('Harry').parent().find('button').click();\ncy.get('table>tbody>tr').should('have.length', 0);",
               "err": {},
-              "uuid": "f365dd71-a953-477d-a5f1-877eca989f56",
-              "parentUUID": "2e7961ae-b0fc-4825-abd2-3dd6b0b47870",
+              "uuid": "57f474b7-870b-4460-8faf-71b210832e19",
+              "parentUUID": "f413c741-5432-40aa-b70d-faa58b570356",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "df5fd1f9-1199-480b-bea5-5c6759c725f5",
-            "cfb64929-8125-4737-998b-de2067180e35",
-            "959d9e25-7309-4a79-a6b2-045b55811873",
-            "f365dd71-a953-477d-a5f1-877eca989f56"
+            "105db3d3-bc78-4c5a-bf58-3fc0eedeeb35",
+            "2aab8fce-d317-4daf-9318-f49c3e63345c",
+            "f0658086-a9b0-4076-a4f1-c017515ab557",
+            "57f474b7-870b-4460-8faf-71b210832e19"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 9927,
+          "duration": 10276,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -139,7 +139,7 @@
     },
     "mochawesome": {
       "options": {
-        "quiet": false,
+        "quiet": true,
         "reportFilename": "mochawesome",
         "saveHtml": false,
         "saveJson": true,
@@ -151,11 +151,12 @@
     },
     "marge": {
       "options": {
-        "charts": true,
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quiet": true,
         "overwrite": false,
         "html": false,
-        "json": true,
-        "reportDir": "cypress/reports/"
+        "json": true
       },
       "version": "6.2.0"
     }
